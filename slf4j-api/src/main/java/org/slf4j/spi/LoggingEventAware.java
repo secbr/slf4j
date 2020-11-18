@@ -4,6 +4,6 @@ import org.slf4j.event.LoggingEvent;
 
 public interface LoggingEventAware {
 
-	void log(LoggingEvent event);
-	
+    void log(LoggingEvent event);
+
 }

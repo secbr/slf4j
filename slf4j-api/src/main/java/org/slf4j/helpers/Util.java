@@ -12,7 +12,7 @@ public final class Util {
     }
 
     public static String safeGetSystemProperty(String key) {
-        if (key == null) {
+        if(key == null) {
             throw new IllegalArgumentException("null input");
         }
 
@@ -27,7 +27,7 @@ public final class Util {
 
     public static boolean safeGetBooleanSystemProperty(String key) {
         String value = safeGetSystemProperty(key);
-        if (value == null) {
+        if(value == null) {
             return false;
         } else {
             return "true".equalsIgnoreCase(value);
@@ -50,9 +50,9 @@ public final class Util {
     private static boolean SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED = false;
 
     private static ClassContextSecurityManager getSecurityManager() {
-        if (SECURITY_MANAGER != null) {
+        if(SECURITY_MANAGER != null) {
             return SECURITY_MANAGER;
-        } else if (SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED) {
+        } else if(SECURITY_MANAGER_CREATION_ALREADY_ATTEMPTED) {
             return null;
         } else {
             SECURITY_MANAGER = safeCreateSecurityManager();
@@ -76,7 +76,7 @@ public final class Util {
      */
     public static Class<?> getCallingClass() {
         ClassContextSecurityManager securityManager = getSecurityManager();
-        if (securityManager == null) {
+        if(securityManager == null) {
             return null;
         }
         Class<?>[] trace = securityManager.getClassContext();
@@ -84,14 +84,14 @@ public final class Util {
 
         // Advance until Util is found
         int i;
-        for (i = 0; i < trace.length; i++) {
-            if (thisClassName.equals(trace[i].getName())) {
+        for(i = 0; i < trace.length; i++) {
+            if(thisClassName.equals(trace[i].getName())) {
                 break;
             }
         }
 
         // trace[i] = Util; trace[i+1] = caller; trace[i+2] = caller's caller
-        if (i >= trace.length || i + 2 >= trace.length) {
+        if(i >= trace.length || i + 2 >= trace.length) {
             throw new IllegalStateException("Failed to find org.slf4j.helpers.Util or its caller in the stack; " + "this should not happen");
         }
 

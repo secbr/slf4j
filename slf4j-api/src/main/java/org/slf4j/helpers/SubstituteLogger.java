@@ -1,19 +1,19 @@
 package org.slf4j.helpers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Queue;
-
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.event.EventRecodingLogger;
 import org.slf4j.event.LoggingEvent;
 import org.slf4j.event.SubstituteLoggingEvent;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Queue;
+
 /**
  * A logger implementation which logs via a delegate logger. By default, the delegate is a
  * {@link NOPLogger}. However, a different delegate can be set at any time.
- * 
+ *
  * <p>See also the <a href="http://www.slf4j.org/codes.html#substituteLogger">relevant
  * error code</a> documentation.
  *
@@ -30,7 +30,7 @@ public class SubstituteLogger implements Logger {
     private Queue<SubstituteLoggingEvent> eventQueue;
 
     public final boolean createdPostInitialization;
-    
+
     public SubstituteLogger(String name, Queue<SubstituteLoggingEvent> eventQueue, boolean createdPostInitialization) {
         this.name = name;
         this.eventQueue = eventQueue;
@@ -344,16 +344,16 @@ public class SubstituteLogger implements Logger {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if(this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if(o == null || getClass() != o.getClass()) {
             return false;
         }
 
         SubstituteLogger that = (SubstituteLogger) o;
 
-        if (!name.equals(that.name)) {
+        if(!name.equals(that.name)) {
             return false;
         }
 
@@ -381,7 +381,7 @@ public class SubstituteLogger implements Logger {
     }
 
     private Logger getEventRecordingLogger() {
-        if (eventRecodingLogger == null) {
+        if(eventRecodingLogger == null) {
             eventRecodingLogger = new EventRecodingLogger(this, eventQueue);
         }
         return eventRecodingLogger;
@@ -389,6 +389,7 @@ public class SubstituteLogger implements Logger {
 
     /**
      * Typically called after the {@link org.slf4j.LoggerFactory} initialization phase is completed.
+     *
      * @param delegate
      */
     public void setDelegate(Logger delegate) {
@@ -396,7 +397,7 @@ public class SubstituteLogger implements Logger {
     }
 
     public boolean isDelegateEventAware() {
-        if (delegateEventAware != null) {
+        if(delegateEventAware != null) {
             return delegateEventAware;
         }
 
@@ -410,7 +411,7 @@ public class SubstituteLogger implements Logger {
     }
 
     public void log(LoggingEvent event) {
-        if (isDelegateEventAware()) {
+        if(isDelegateEventAware()) {
             try {
                 logMethodCache.invoke(_delegate, event);
             } catch (IllegalAccessException e) {

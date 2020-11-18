@@ -31,11 +31,11 @@ public class SubstituteServiceProvider implements SLF4JServiceProvider {
 
     @Override
     public String getRequesteApiVersion() {
-       throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
-    
+
     @Override
     public void initialize() {
-    	
+
     }
 }

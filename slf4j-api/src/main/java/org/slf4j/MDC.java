@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2004-2011 QOS.ch
  * All rights reserved.
- *
+ * <p>
  * Permission is hereby granted, free  of charge, to any person obtaining
  * a  copy  of this  software  and  associated  documentation files  (the
  * "Software"), to  deal in  the Software without  restriction, including
@@ -9,10 +9,10 @@
  * distribute,  sublicense, and/or sell  copies of  the Software,  and to
  * permit persons to whom the Software  is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The  above  copyright  notice  and  this permission  notice  shall  be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
  * EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
  * MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
@@ -20,12 +20,8 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
  */
 package org.slf4j;
-
-import java.io.Closeable;
-import java.util.Map;
 
 import org.slf4j.helpers.BasicMDCAdapter;
 import org.slf4j.helpers.NOPMDCAdapter;
@@ -33,10 +29,13 @@ import org.slf4j.helpers.Util;
 import org.slf4j.spi.MDCAdapter;
 import org.slf4j.spi.SLF4JServiceProvider;
 
+import java.io.Closeable;
+import java.util.Map;
+
 /**
  * This class hides and serves as a substitute for the underlying logging
  * system's MDC implementation.
- * 
+ *
  * <p>
  * If the underlying logging system offers MDC functionality, then SLF4J's MDC,
  * i.e. this class, will delegate to the underlying system's MDC. Note that at
@@ -49,15 +48,15 @@ import org.slf4j.spi.SLF4JServiceProvider;
  * Thus, as a SLF4J user, you can take advantage of MDC in the presence of log4j,
  * logback, or java.util.logging, but without forcing these systems as
  * dependencies upon your users.
- * 
+ *
  * <p>
  * For more information on MDC please see the <a
  * href="http://logback.qos.ch/manual/mdc.html">chapter on MDC</a> in the
  * logback manual.
- * 
+ *
  * <p>
  * Please note that all methods in this class are static.
- * 
+ *
  * @author Ceki G&uuml;lc&uuml;
  * @since 1.4.1
  */
@@ -88,7 +87,7 @@ public class MDC {
 
     static {
         SLF4JServiceProvider provider = LoggerFactory.getProvider();
-        if (provider != null) {
+        if(provider != null) {
             mdcAdapter = provider.getMDCAdapter();
         } else {
             Util.report("Failed to find provider.");
@@ -102,21 +101,21 @@ public class MDC {
      * <code>key</code> parameter into the current thread's diagnostic context map. The
      * <code>key</code> parameter cannot be null. The <code>val</code> parameter
      * can be null only if the underlying implementation supports it.
-     * 
+     *
      * <p>
      * This method delegates all work to the MDC of the underlying logging system.
      *
      * @param key non-null key 
      * @param val value to put in the map
-     * 
+     *
      * @throws IllegalArgumentException
      *           in case the "key" parameter is null
      */
     public static void put(String key, String val) throws IllegalArgumentException {
-        if (key == null) {
+        if(key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         mdcAdapter.put(key, val);
@@ -158,7 +157,7 @@ public class MDC {
     /**
      * Get the diagnostic context identified by the <code>key</code> parameter. The
      * <code>key</code> parameter cannot be null.
-     * 
+     *
      * <p>
      * This method delegates all work to the MDC of the underlying logging system.
      *
@@ -168,11 +167,11 @@ public class MDC {
      *           in case the "key" parameter is null
      */
     public static String get(String key) throws IllegalArgumentException {
-        if (key == null) {
+        if(key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
 
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         return mdcAdapter.get(key);
@@ -189,11 +188,11 @@ public class MDC {
      *           in case the "key" parameter is null
      */
     public static void remove(String key) throws IllegalArgumentException {
-        if (key == null) {
+        if(key == null) {
             throw new IllegalArgumentException("key parameter cannot be null");
         }
 
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         mdcAdapter.remove(key);
@@ -203,7 +202,7 @@ public class MDC {
      * Clear all entries in the MDC of the underlying implementation.
      */
     public static void clear() {
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         mdcAdapter.clear();
@@ -212,12 +211,12 @@ public class MDC {
     /**
      * Return a copy of the current thread's context map, with keys and values of
      * type String. Returned value may be null.
-     * 
+     *
      * @return A copy of the current thread's context map. May be null.
      * @since 1.5.1
      */
     public static Map<String, String> getCopyOfContextMap() {
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         return mdcAdapter.getCopyOfContextMap();
@@ -227,13 +226,13 @@ public class MDC {
      * Set the current thread's context map by first clearing any existing map and
      * then copying the map passed as parameter. The context map passed as
      * parameter must only contain keys and values of type String.
-     * 
+     *
      * @param contextMap
      *          must contain only keys and values of type String
      * @since 1.5.1
      */
     public static void setContextMap(Map<String, String> contextMap) {
-        if (mdcAdapter == null) {
+        if(mdcAdapter == null) {
             throw new IllegalStateException("MDCAdapter cannot be null. See also " + NULL_MDCA_URL);
         }
         mdcAdapter.setContextMap(contextMap);
@@ -241,7 +240,7 @@ public class MDC {
 
     /**
      * Returns the MDCAdapter instance currently in use.
-     * 
+     *
      * @return the MDcAdapter instance currently in use.
      * @since 1.4.2
      */

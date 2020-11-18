@@ -68,8 +68,9 @@ public class DefaultLoggingEvent implements LoggingEvent {
 
 	@Override
 	public Object[] getArgumentArray() {
-		if (arguments == null)
+		if (arguments == null) {
 			return null;
+		}
 		return arguments.toArray();
 	}
 

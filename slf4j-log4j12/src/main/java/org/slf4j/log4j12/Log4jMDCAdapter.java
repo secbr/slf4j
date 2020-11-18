@@ -39,6 +39,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
         }
     }
 
+    @Override
     public void clear() {
         @SuppressWarnings("rawtypes")
         Map map = org.apache.log4j.MDC.getContext();
@@ -47,6 +48,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
         }
     }
 
+    @Override
     public String get(String key) {
         return (String) org.apache.log4j.MDC.get(key);
     }
@@ -63,6 +65,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
      * @throws IllegalArgumentException
      *             in case the "key" or <b>"val"</b> parameter is null
      */
+    @Override
     public void put(String key, String val) {
         org.apache.log4j.MDC.put(key, val);
     }
@@ -71,6 +74,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
         org.apache.log4j.MDC.remove(key);
     }
 
+    @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public Map getCopyOfContextMap() {
         Map old = org.apache.log4j.MDC.getContext();
@@ -81,6 +85,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
         }
     }
 
+    @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void setContextMap(Map contextMap) {
         Map old = org.apache.log4j.MDC.getContext();

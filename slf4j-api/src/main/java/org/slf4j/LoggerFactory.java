@@ -296,6 +296,7 @@ public final class LoggerFactory {
             for(String aAPI_COMPATIBILITY_LIST : API_COMPATIBILITY_LIST) {
                 if(requested.startsWith(aAPI_COMPATIBILITY_LIST)) {
                     match = true;
+                    break;
                 }
             }
             if(!match) {

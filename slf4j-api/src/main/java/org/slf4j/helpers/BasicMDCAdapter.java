@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2004-2011 QOS.ch
  * All rights reserved.
- *
+ * <p>
  * Permission is hereby granted, free  of charge, to any person obtaining
  * a  copy  of this  software  and  associated  documentation files  (the
  * "Software"), to  deal in  the Software without  restriction, including
@@ -9,10 +9,10 @@
  * distribute,  sublicense, and/or sell  copies of  the Software,  and to
  * permit persons to whom the Software  is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The  above  copyright  notice  and  this permission  notice  shall  be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
  * EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
  * MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
@@ -20,14 +20,14 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
  */
 package org.slf4j.helpers;
 
 import org.slf4j.spi.MDCAdapter;
 
-import java.util.*;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Basic MDC implementation, which can be used with logging systems that lack
@@ -39,7 +39,7 @@ import java.util.Map;
  * @author Ceki Gulcu
  * @author Maarten Bosteels
  * @author Lukasz Cwik
- * 
+ *
  * @since 1.5.0
  */
 public class BasicMDCAdapter implements MDCAdapter {
@@ -47,10 +47,10 @@ public class BasicMDCAdapter implements MDCAdapter {
     private InheritableThreadLocal<Map<String, String>> inheritableThreadLocal = new InheritableThreadLocal<Map<String, String>>() {
         @Override
         protected Map<String, String> childValue(Map<String, String> parentValue) {
-            if (parentValue == null) {
+            if(parentValue == null) {
                 return null;
             }
-            return new HashMap<String, String>(parentValue);
+            return new HashMap<>(parentValue);
         }
     };
 
@@ -68,12 +68,12 @@ public class BasicMDCAdapter implements MDCAdapter {
      */
     @Override
     public void put(String key, String val) {
-        if (key == null) {
+        if(key == null) {
             throw new IllegalArgumentException("key cannot be null");
         }
         Map<String, String> map = inheritableThreadLocal.get();
-        if (map == null) {
-            map = new HashMap<String, String>();
+        if(map == null) {
+            map = new HashMap<>();
             inheritableThreadLocal.set(map);
         }
         map.put(key, val);
@@ -85,7 +85,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     @Override
     public String get(String key) {
         Map<String, String> map = inheritableThreadLocal.get();
-        if ((map != null) && (key != null)) {
+        if((map != null) && (key != null)) {
             return map.get(key);
         } else {
             return null;
@@ -98,7 +98,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     @Override
     public void remove(String key) {
         Map<String, String> map = inheritableThreadLocal.get();
-        if (map != null) {
+        if(map != null) {
             map.remove(key);
         }
     }
@@ -109,7 +109,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     @Override
     public void clear() {
         Map<String, String> map = inheritableThreadLocal.get();
-        if (map != null) {
+        if(map != null) {
             map.clear();
             inheritableThreadLocal.remove();
         }
@@ -123,7 +123,7 @@ public class BasicMDCAdapter implements MDCAdapter {
      */
     public Set<String> getKeys() {
         Map<String, String> map = inheritableThreadLocal.get();
-        if (map != null) {
+        if(map != null) {
             return map.keySet();
         } else {
             return null;
@@ -138,7 +138,7 @@ public class BasicMDCAdapter implements MDCAdapter {
     @Override
     public Map<String, String> getCopyOfContextMap() {
         Map<String, String> oldMap = inheritableThreadLocal.get();
-        if (oldMap != null) {
+        if(oldMap != null) {
             return new HashMap<>(oldMap);
         } else {
             return null;
