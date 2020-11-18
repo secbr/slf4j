@@ -69,7 +69,7 @@ public final class LoggerFactory {
     static final int SUCCESSFUL_INITIALIZATION = 3;
 
     /**
-     * 误操作的应急provider初始化
+     * 无操作的SLF4JServiceProvider实例化状态
      */
     static final int NOP_FALLBACK_INITIALIZATION = 4;
 
