@@ -52,6 +52,7 @@ public class NOPMDCAdapter implements MDCAdapter {
     public void put(String key, String val) {
     }
 
+    @Override
     public void remove(String key) {
     }
 

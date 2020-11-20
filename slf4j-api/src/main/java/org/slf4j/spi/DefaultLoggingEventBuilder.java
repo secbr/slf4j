@@ -78,22 +78,22 @@ public class DefaultLoggingEventBuilder implements LoggingEventBuilder {
         innerLog(loggingEvent);
     }
 
-    private void innerLog(LoggingEvent logggingEvent) {
+    private void innerLog(LoggingEvent loggingEvent) {
         if(logger instanceof LoggingEventAware) {
-            ((LoggingEventAware) logger).log(logggingEvent);
+            ((LoggingEventAware) logger).log(loggingEvent);
         } else {
-            logViaPublicLoggerAPI(logggingEvent);
+            logViaPublicLoggerAPI(loggingEvent);
         }
     }
 
-    private void logViaPublicLoggerAPI(LoggingEvent logggingEvent) {
-        Object[] argArray = logggingEvent.getArgumentArray();
+    private void logViaPublicLoggerAPI(LoggingEvent loggingEvent) {
+        Object[] argArray = loggingEvent.getArgumentArray();
         int argLen = argArray == null ? 0 : argArray.length;
 
-        Throwable t = logggingEvent.getThrowable();
+        Throwable t = loggingEvent.getThrowable();
         int tLen = t == null ? 0 : 1;
 
-        String msg = logggingEvent.getMessage();
+        String msg = loggingEvent.getMessage();
 
         Object[] combinedArguments = new Object[argLen + tLen];
 
@@ -104,9 +104,9 @@ public class DefaultLoggingEventBuilder implements LoggingEventBuilder {
             combinedArguments[argLen] = t;
         }
 
-        msg = mergeMarkersAndKeyValuePairs(logggingEvent, msg);
+        msg = mergeMarkersAndKeyValuePairs(loggingEvent, msg);
 
-        switch(logggingEvent.getLevel()) {
+        switch(loggingEvent.getLevel()) {
             case TRACE:
                 logger.trace(msg, combinedArguments);
                 break;
@@ -129,27 +129,27 @@ public class DefaultLoggingEventBuilder implements LoggingEventBuilder {
     /**
      * Prepend markers and key-value pairs to the message.
      *
-     * @param logggingEvent
+     * @param loggingEvent
      * @param msg
      * @return
      */
-    private String mergeMarkersAndKeyValuePairs(LoggingEvent logggingEvent, String msg) {
+    private String mergeMarkersAndKeyValuePairs(LoggingEvent loggingEvent, String msg) {
 
         StringBuilder sb = null;
 
-        if(loggingEvent.getMarkers() != null) {
+        if(this.loggingEvent.getMarkers() != null) {
             sb = new StringBuilder();
-            for(Marker marker : logggingEvent.getMarkers()) {
+            for(Marker marker : loggingEvent.getMarkers()) {
                 sb.append(marker);
                 sb.append(' ');
             }
         }
 
-        if(logggingEvent.getKeyValuePairs() != null) {
+        if(loggingEvent.getKeyValuePairs() != null) {
             if(sb == null) {
                 sb = new StringBuilder();
             }
-            for(KeyValuePair kvp : logggingEvent.getKeyValuePairs()) {
+            for(KeyValuePair kvp : loggingEvent.getKeyValuePairs()) {
                 sb.append(kvp.key);
                 sb.append('=');
                 sb.append(kvp.value);

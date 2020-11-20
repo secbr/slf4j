@@ -70,6 +70,7 @@ public class Log4jMDCAdapter implements MDCAdapter {
         org.apache.log4j.MDC.put(key, val);
     }
 
+    @Override
     public void remove(String key) {
         org.apache.log4j.MDC.remove(key);
     }

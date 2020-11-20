@@ -139,7 +139,7 @@ public final class LoggerFactory {
             // 判断是否扫描到对应的SLF4JServiceProvider实现类
             if(!providersList.isEmpty()) {
                 PROVIDER = providersList.get(0);
-                // SLF4JServiceProvider.initialize() is intended to be called here and nowhere else.
+                // SLF4JServiceProvider.initialize()方法仅在此处调用，其他地方都不允许调用。
                 PROVIDER.initialize();
                 INITIALIZATION_STATE = SUCCESSFUL_INITIALIZATION;
                 // 打印绑定了哪个SLF4JServiceProvider
