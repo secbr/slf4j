@@ -39,6 +39,7 @@ public class Log4jLoggerFactory implements ILoggerFactory {
     ConcurrentMap<String, Logger> loggerMap;
 
     public Log4jLoggerFactory() {
+        // 线程安全的HashMap
         loggerMap = new ConcurrentHashMap<>();
         // force log4j to initialize
         org.apache.log4j.LogManager.getRootLogger();
