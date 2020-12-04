@@ -62,6 +62,7 @@ public class Log4jLoggerFactory implements ILoggerFactory {
                 log4jLogger = LogManager.getLogger(name);
             }
 
+            // 适配器模式的使用
             Logger newInstance = new Log4jLoggerAdapter(log4jLogger);
             Logger oldInstance = loggerMap.putIfAbsent(name, newInstance);
             return oldInstance == null ? newInstance : oldInstance;
