@@ -15,6 +15,8 @@
 
 更多技术干货，请关注公众号"程序新视界"。
 
+![程序新视界](https://www.choupangxia.com/wp-content/uploads/2019/07/weixin.jpg)
+
 
 # How to build SLF4J
 
