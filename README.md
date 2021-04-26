@@ -7,9 +7,15 @@
 
 03. [slf4j是如何绑定具体的日志框架的？](./doc/03、slf4j是如何绑定具体的日志框架的？.md)
 
+04. [slf4j中的桥接器是如何运作的？](./doc/04、slf4j中的桥接器是如何运作的？.md)
+
+05. [slf4j中有典型适配器模式，不看一看？](./doc/05、slf4j中有典型适配器模式，不看一看？.md)
+
 
 
 更多技术干货，请关注公众号"程序新视界"。
+
+![程序新视界](https://www.choupangxia.com/wp-content/uploads/2019/07/weixin.jpg)
 
 
 # How to build SLF4J
